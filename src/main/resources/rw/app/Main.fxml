@@ -111,7 +111,7 @@
               <children>
                         <AnchorPane prefHeight="179.0" prefWidth="591.0">
                            <children>
-                      <Label alignment="CENTER" font="$x1" layoutX="245.0" layoutY="26.0" style="&#10;" text="View Legend" textAlignment="CENTER" textFill="#675959" wrapText="false" />
+                      <Label alignment="CENTER" font="$x1" layoutX="245.0" layoutY="26.0" style="&#10;" text="World Legend" textAlignment="CENTER" textFill="#675959" wrapText="false" />
                               <Label layoutX="53.0" layoutY="56.0" text="To remove an entity in the world below, please right click on the entity you want to remove." />
                               <GridPane alignment="TOP_RIGHT" disable="true" gridLinesVisible="true" layoutX="196.0" layoutY="91.0">
                                 <columnConstraints>
@@ -123,26 +123,26 @@
                                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                 </rowConstraints>
                                  <children>
-                                    <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="30.0" opacity="0.5" stroke="BLACK" strokeType="INSIDE" width="100.0" />
-                                    <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="30.0" layoutX="10.0" layoutY="10.0" stroke="BLACK" strokeType="INSIDE" width="100.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                                    <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="30.0" layoutX="110.0" layoutY="10.0" stroke="BLACK" strokeType="INSIDE" width="100.0" GridPane.columnIndex="1" />
-                                    <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="30.0" layoutX="10.0" layoutY="10.0" stroke="BLACK" strokeType="INSIDE" width="100.0" GridPane.rowIndex="1" />
-                                    <Label alignment="CENTER" blendMode="SRC_ATOP" contentDisplay="CENTER" text="Predacon" textAlignment="CENTER">
+                                    <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#c50808" height="30.0" opacity="0.5" stroke="BLACK" strokeType="INSIDE" width="100.0" />
+                                    <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="30.0" layoutX="10.0" layoutY="10.0" opacity="0.5" stroke="BLACK" strokeType="INSIDE" width="100.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                    <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#a7aeb5" height="30.0" layoutX="110.0" layoutY="10.0" opacity="0.5" stroke="BLACK" strokeType="INSIDE" width="100.0" GridPane.columnIndex="1" />
+                                    <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#233cd9" height="30.0" layoutX="10.0" layoutY="10.0" opacity="0.5" stroke="BLACK" strokeType="INSIDE" width="100.0" GridPane.rowIndex="1" />
+                                    <Label alignment="CENTER" blendMode="SRC_ATOP" contentDisplay="CENTER" opacity="0.5" text="Predacon" textAlignment="CENTER">
                                        <font>
                                           <Font name="Candara Bold" size="12.0" />
                                        </font>
                                     </Label>
-                                    <Label alignment="CENTER" contentDisplay="CENTER" layoutX="36.0" layoutY="17.0" text="Maximal" textAlignment="CENTER" textFill="WHITE" GridPane.rowIndex="1">
+                                    <Label alignment="CENTER" contentDisplay="CENTER" layoutX="36.0" layoutY="17.0" text="Maximal" textAlignment="CENTER" GridPane.rowIndex="1">
                                        <font>
                                           <Font name="Candara Bold" size="12.0" />
                                        </font>
                                     </Label>
-                                    <Label alignment="CENTER" contentDisplay="CENTER" layoutX="38.0" layoutY="47.0" text="Wall" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="1">
+                                    <Label alignment="CENTER" contentDisplay="CENTER" layoutX="38.0" layoutY="47.0" text="Wall" textAlignment="CENTER" GridPane.columnIndex="1">
                                        <font>
                                           <Font name="Candara Bold" size="12.0" />
                                        </font>
                                     </Label>
-                                    <Label alignment="CENTER" contentDisplay="CENTER" layoutX="149.0" layoutY="17.0" text="Empty" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                    <Label alignment="CENTER" contentDisplay="CENTER" layoutX="149.0" layoutY="17.0" text="Empty" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="1">
                                        <font>
                                           <Font name="Candara Bold" size="12.0" />
                                        </font>

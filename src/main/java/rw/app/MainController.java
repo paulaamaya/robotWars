@@ -15,6 +15,9 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
+import rw.battle.Entity;
+import rw.battle.Maximal;
+import rw.battle.Wall;
 import rw.enums.WeaponType;
 import rw.util.Reader;
 
@@ -151,10 +154,20 @@ public class MainController {
         for (int row = 0; row < rows; row++) {
             for (int column = 0; column < columns; column++) {
                 Rectangle rectangle;
+                // Pad the perimeter with walls
                 if (row == 0 || row == rows - 1 || column == 0 || column == columns - 1) {
                     rectangle = new Rectangle(50, 50, Color.GRAY);
                 } else {
-                    rectangle = new Rectangle(50, 50, Color.WHITE);
+                    // Indices in grid pane are increased by one due to padding of columns and rows.
+                    Entity entity = battle.getEntity(row - 1, column - 1);
+                    rectangle = new Rectangle(50,50);
+                    switch (entity) {
+                        case null -> rectangle.setFill(Color.WHITE);
+                        case Wall wall -> rectangle.setFill(Color.GRAY);
+                        case Maximal maximal ->
+                                rectangle.setFill(Color.BLUE);
+                        default -> rectangle.setFill(Color.RED);
+                    }
                 }
                 rectangle.setStroke(Color.BLACK); // Set black outline
                 gridPane.add(rectangle, column, row);
