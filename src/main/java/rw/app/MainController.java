@@ -1,5 +1,6 @@
 package rw.app;
 
+import javafx.scene.shape.Rectangle;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import rw.battle.Battle;
@@ -131,9 +132,33 @@ public class MainController {
         // Read in source file
         try{
             Battle battle = Reader.loadBattle(sourceFile);
-            // TODO: Populate world according to battle info.
+            populateGridPane(battle);
         } catch (RuntimeException e){
             statusLabel.setText(e.getMessage());
+        }
+
+    }
+
+    private void populateGridPane(Battle battle){
+        System.out.println(battle.battleString());
+        // Clear previous content of grid pane if needed
+        gridPane.getChildren().clear();
+
+        // Get gridpane
+        int rows = battle.getRows() + 2;
+        int columns = battle.getColumns() + 2;
+
+        for (int row = 0; row < rows; row++) {
+            for (int column = 0; column < columns; column++) {
+                Rectangle rectangle;
+                if (row == 0 || row == rows - 1 || column == 0 || column == columns - 1) {
+                    rectangle = new Rectangle(50, 50, Color.GRAY);
+                } else {
+                    rectangle = new Rectangle(50, 50, Color.WHITE);
+                }
+                rectangle.setStroke(Color.BLACK); // Set black outline
+                gridPane.add(rectangle, column, row);
+            }
         }
 
     }
