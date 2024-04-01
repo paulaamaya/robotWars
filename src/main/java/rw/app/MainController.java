@@ -1,5 +1,6 @@
 package rw.app;
 
+import javafx.application.Platform;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.*;
@@ -125,6 +126,9 @@ public class MainController {
     @FXML
     private Color x4;
 
+    /**
+     * Initializes GUI with an empty 3x3 battle.
+     */
     @FXML
     public void initialize(){
         // Add weapons to predacon weapons choice box
@@ -136,6 +140,10 @@ public class MainController {
         populateGridPane();
     }
 
+    /**
+     * Handles click event in the About menu option.  Displays alert with project information.
+     * @param event Click event in About menu option.
+     */
     @FXML
     void aboutHandler(ActionEvent event) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -148,11 +156,17 @@ public class MainController {
         alert.show();
     }
 
+    /**
+     * Handles click event in the Load World menu option.  Prompts user to choose a .txt file from their
+     * computer and attempts to create a new World to display in the GUI based on said file.
+     * @param event Click event in the Load World menu option.
+     */
     @FXML
     void loadHandler(ActionEvent event) {
         // Prompt user to select file
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Open File");
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Text Files", "*.txt"));
         Stage stage = (Stage) loadButton.getParentPopup().getOwnerWindow();
         File sourceFile = fileChooser.showOpenDialog(stage);
         // Read in source file
@@ -164,30 +178,49 @@ public class MainController {
         }
 
         // Inform user successfully read file
-        statusLabel.setText("Successfully imported world from " + sourceFile.getName());
+        statusLabel.setText("Successfully imported world from " + sourceFile.getName() + " file.");
     }
 
 
+    /**
+     * Handles click event in the Quit menu option.  Quits application.
+     * @param event Click event in the Quit menu option.
+     */
     @FXML
     void quitHandler(ActionEvent event) {
-
+        Platform.exit();
     }
 
+    /**
+     * Handles click event in the Save As... menu option.  Prompts user to select a location and enter a name
+     * for the file where they want to store the World information.  If input is valid, then proceeds to write
+     * Battle information displayed in the GUI as a .txt file.
+     * @param event Click event in the Save As... menu option.
+     */
     @FXML
     void saveAsHandler(ActionEvent event) {
-
+        // Prompt user to select location
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Save As...");
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Text Files", "*.txt"));
+        Stage stage = (Stage) loadButton.getParentPopup().getOwnerWindow();
+        File destinationFile = fileChooser.showSaveDialog(stage);
+        try {
+            Writer.writeBattleToFile(this.battle, destinationFile.getPath());
+        } catch (RuntimeException e){
+            statusLabel.setText(e.getMessage());
+        }
+        statusLabel.setText("Successfully saved world to" + destinationFile.getPath());
     }
 
     @FXML
     void saveHandler(ActionEvent event) {
         try {
-            // TODO: Remove this print statement
-            System.out.println(this.battle.battleString());
             Writer.writeBattleToFile(this.battle, "world.txt");
         } catch (RuntimeException e){
             statusLabel.setText(e.getMessage());
         }
-        statusLabel.setText("Successfully wrote world to world.txt");
+        statusLabel.setText("Successfully saved world to world.txt");
     }
 
     //////////////////////////////////////////// HELPER METHODS ////////////////////////////////////////////
