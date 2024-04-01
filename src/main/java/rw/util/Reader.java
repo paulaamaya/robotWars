@@ -39,6 +39,10 @@ public final class Reader {
             // Read second line as columns
             line = reader.readLine();
             int columns = Integer.parseInt(line.trim());
+            // Verify rows and columns are positive
+            if(rows < 0 || columns < 0){
+                throw new ArrayIndexOutOfBoundsException("Wrong input file! World cannot have negative dimensions");
+            }
             battle = new Battle(rows, columns);
 
             // ENTITY INFORMATION
