@@ -37,7 +37,7 @@
         </Menu>
         <Menu mnemonicParsing="false" text="Help">
           <items>
-            <MenuItem fx:id="aboutButton" mnemonicParsing="false" onAction="#aboutHandler" text="Robot Wars World Editor" />
+            <MenuItem fx:id="aboutButton" mnemonicParsing="false" onAction="#aboutHandler" text="About" />
           </items>
         </Menu>
       </menus>

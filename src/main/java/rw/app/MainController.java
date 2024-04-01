@@ -1,17 +1,12 @@
 package rw.app;
 
+import javafx.scene.control.*;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import rw.battle.Battle;
 import javafx.fxml.FXML;
 import javafx.event.ActionEvent;
-import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.MenuItem;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
@@ -20,8 +15,17 @@ import rw.battle.Maximal;
 import rw.battle.Wall;
 import rw.enums.WeaponType;
 import rw.util.Reader;
-
 import java.io.File;
+
+
+/**
+ * A controller class for Robot Wars World Editor.
+ *
+ * @author Paula Amaya
+ * @email paula.amaya@ucalgary.ca
+ * @tutorial 09
+ * @date April 1, 2024
+ */
 
 public class MainController {
 
@@ -118,11 +122,19 @@ public class MainController {
         for (WeaponType weapon: WeaponType.values()){
             predaconWeaponTypeInput.getItems().add(weapon.name());
         }
+        //
     }
 
     @FXML
     void aboutHandler(ActionEvent event) {
-
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("About");
+        alert.setHeaderText("Robot Wars World Editor");
+        String aboutInfo = new String("A world editor for a battle simulator.\n" +
+                "Author: Paula Amaya\n" + "Email: paula.amaya@ucalgary.ca\n" +
+                "Version: " + Main.version + "\n");
+        alert.setContentText(aboutInfo);
+        alert.show();
     }
 
     @FXML
@@ -142,6 +154,28 @@ public class MainController {
 
     }
 
+
+    @FXML
+    void quitHandler(ActionEvent event) {
+
+    }
+
+    @FXML
+    void saveAsHandler(ActionEvent event) {
+
+    }
+
+    @FXML
+    void saveHandler(ActionEvent event) {
+
+    }
+
+    //////////////////////////////////////////// HELPER METHODS ////////////////////////////////////////////
+
+    /**
+     * Takes in a battle object and populates GridPane according to the information in battle.
+     * @param battle Battle to be represented in the GridPane
+     */
     private void populateGridPane(Battle battle){
         System.out.println(battle.battleString());
         // Clear previous content of grid pane if needed
@@ -169,25 +203,12 @@ public class MainController {
                         default -> rectangle.setFill(Color.RED);
                     }
                 }
-                rectangle.setStroke(Color.BLACK); // Set black outline
+                // Set black outline for rectangles
+                rectangle.setStroke(Color.BLACK);
+                // Add rectangle to pane
                 gridPane.add(rectangle, column, row);
             }
         }
-
-    }
-
-    @FXML
-    void quitHandler(ActionEvent event) {
-
-    }
-
-    @FXML
-    void saveAsHandler(ActionEvent event) {
-
-    }
-
-    @FXML
-    void saveHandler(ActionEvent event) {
 
     }
 
