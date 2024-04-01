@@ -20,6 +20,8 @@ import rw.battle.Wall;
 import rw.enums.Colors;
 import rw.enums.WeaponType;
 import rw.util.Reader;
+import rw.util.Writer;
+
 import java.io.File;
 
 
@@ -178,36 +180,14 @@ public class MainController {
 
     @FXML
     void saveHandler(ActionEvent event) {
-        Battle battle = createBattleFromGridPane();
-        // TODO: Save .txt to world.txt and display in status.
-    }
-
-    /**
-     * Generates a battle object based on information in the GridPane.
-     * @return Battle corresponding to GridPane
-     */
-    private Battle createBattleFromGridPane() {
-        // Determine battle sizes.  Recall grid pane is padded with walls that are not part of the battle
-        int gridRows = gridPane.getRowCount();
-        int gridColumns = gridPane.getColumnCount();
-        Battle battle = new Battle(gridRows - 2, gridColumns - 2);
-
-        // Iterate over all children of the GridPane
-        for (Node node : gridPane.getChildren()) {
-            Rectangle rectangle = (Rectangle) node;
-            int row = GridPane.getRowIndex(rectangle);
-            int column = GridPane.getColumnIndex(rectangle);
-            // Ignore wall padding entries
-            if (row == 0 || row == gridRows - 1 || column == 0 || column == gridColumns - 1) {
-                continue;
-            } else {
-                Entity entity;
-                Paint rectangleColor = rectangle.getFill();
-                //if (rectangleColor.equals(Color.GRAY))
-            }
-
+        try {
+            // TODO: Remove this print statement
+            System.out.println(this.battle.battleString());
+            Writer.writeBattleToFile(this.battle, "world.txt");
+        } catch (RuntimeException e){
+            statusLabel.setText(e.getMessage());
         }
-        return battle;
+        statusLabel.setText("Successfully wrote world to world.txt");
     }
 
     //////////////////////////////////////////// HELPER METHODS ////////////////////////////////////////////
@@ -216,6 +196,7 @@ public class MainController {
      * Populates GridPane according to the information in battle attribute.
      */
     private void populateGridPane(){
+        // TODO: Remove this print statement
         System.out.println(this.battle.battleString());
         // Clear previous content of grid pane if needed
         gridPane.getChildren().clear();

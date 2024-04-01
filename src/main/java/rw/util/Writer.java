@@ -30,9 +30,11 @@ public class Writer {
             int battleRows = battle.getRows();
             int battleCols = battle.getColumns();
             // Write rows
-            writer.write(battleRows);
+            writer.write(String.valueOf(battleRows));
+            writer.newLine();
             // Write columns
-            writer.write(battleCols);
+            writer.write(String.valueOf(battleCols));
+            writer.newLine();
 
             // Iterate through each entry and write appropriate entity information
             for (int row = 0; row < battleRows; row++) {
@@ -55,7 +57,7 @@ public class Writer {
                         } else {
                             // MAXIMAL
                             Maximal maximal = (Maximal) entity;
-                            sb.append("MAXIMAL");
+                            sb.append(",MAXIMAL");
                             sb.append(",").append(maximal.getSymbol());
                             sb.append(",").append(maximal.getName());
                             sb.append(",").append(maximal.getHealth());
@@ -66,10 +68,9 @@ public class Writer {
 
                     // Write entry in a new line
                     writer.write(sb.toString());
+                    writer.newLine();
                 }
 
-                // Close writer
-                writer.close();
             }
         } catch (IOException e){
             throw new UncheckedIOException("Problem writing battle to file " + filepath, e);

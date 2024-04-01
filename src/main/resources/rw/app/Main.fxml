@@ -123,10 +123,10 @@
                                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                 </rowConstraints>
                                  <children>
-                                    <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#c50808" height="30.0" opacity="0.5" stroke="BLACK" strokeType="INSIDE" width="100.0" />
+                                    <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#db646c" height="30.0" opacity="0.5" stroke="BLACK" strokeType="INSIDE" width="100.0" />
                                     <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="30.0" layoutX="10.0" layoutY="10.0" opacity="0.5" stroke="BLACK" strokeType="INSIDE" width="100.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                                    <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#a7aeb5" height="30.0" layoutX="110.0" layoutY="10.0" opacity="0.5" stroke="BLACK" strokeType="INSIDE" width="100.0" GridPane.columnIndex="1" />
-                                    <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#233cd9" height="30.0" layoutX="10.0" layoutY="10.0" opacity="0.5" stroke="BLACK" strokeType="INSIDE" width="100.0" GridPane.rowIndex="1" />
+                                    <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#a7aeb5" height="30.0" layoutX="110.0" layoutY="10.0" opacity="0.69" stroke="BLACK" strokeType="INSIDE" width="100.0" GridPane.columnIndex="1" />
+                                    <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#5fb3cf" height="30.0" layoutX="10.0" layoutY="10.0" opacity="0.5" stroke="BLACK" strokeType="INSIDE" width="100.0" GridPane.rowIndex="1" />
                                     <Label alignment="CENTER" blendMode="SRC_ATOP" contentDisplay="CENTER" opacity="0.5" text="Predacon" textAlignment="CENTER">
                                        <font>
                                           <Font name="Candara Bold" size="12.0" />
