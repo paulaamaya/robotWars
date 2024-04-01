@@ -126,8 +126,6 @@ public final class Reader {
                 line = reader.readLine();
             }
 
-            // Close reader
-            reader.close();
         } catch (IOException e){
             throw new UncheckedIOException("Problem reading file " + file.getName(), e);
         } catch (NumberFormatException e){

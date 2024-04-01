@@ -1,6 +1,8 @@
 package rw.app;
 
+import javafx.scene.Node;
 import javafx.scene.control.*;
+import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -28,6 +30,8 @@ import java.io.File;
  */
 
 public class MainController {
+
+    private Battle battle;
 
     @FXML
     private MenuItem aboutButton;
@@ -123,8 +127,8 @@ public class MainController {
             predaconWeaponTypeInput.getItems().add(weapon.name());
         }
         // Load with an empty 3 x 3 battle
-        Battle battle = new Battle(3, 3);
-        populateGridPane(battle);
+        this.battle = new Battle(3, 3);
+        populateGridPane();
     }
 
     @FXML
@@ -132,9 +136,9 @@ public class MainController {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("About");
         alert.setHeaderText("Robot Wars World Editor");
-        String aboutInfo = new String("A world editor for a battle simulator.\n" +
+        String aboutInfo = "A world editor for a battle simulator.\n" +
                 "Author: Paula Amaya\n" + "Email: paula.amaya@ucalgary.ca\n" +
-                "Version: " + Main.version + "\n");
+                "Version: " + Main.version + "\n";
         alert.setContentText(aboutInfo);
         alert.show();
     }
@@ -148,12 +152,14 @@ public class MainController {
         File sourceFile = fileChooser.showOpenDialog(stage);
         // Read in source file
         try{
-            Battle battle = Reader.loadBattle(sourceFile);
-            populateGridPane(battle);
+            this.battle = Reader.loadBattle(sourceFile);
+            populateGridPane();
         } catch (RuntimeException e){
             statusLabel.setText(e.getMessage());
         }
 
+        // Inform user successfully read file
+        statusLabel.setText("Successfully imported world from " + sourceFile.getName());
     }
 
 
@@ -169,23 +175,51 @@ public class MainController {
 
     @FXML
     void saveHandler(ActionEvent event) {
+        Battle battle = createBattleFromGridPane();
+        // TODO: Save .txt to world.txt and display in status.
+    }
 
+    /**
+     * Generates a battle object based on information in the GridPane.
+     * @return Battle corresponding to GridPane
+     */
+    private Battle createBattleFromGridPane() {
+        // Determine battle sizes.  Recall grid pane is padded with walls that are not part of the battle
+        int gridRows = gridPane.getRowCount();
+        int gridColumns = gridPane.getColumnCount();
+        Battle battle = new Battle(gridRows - 2, gridColumns - 2);
+
+        // Iterate over all children of the GridPane
+        for (Node node : gridPane.getChildren()) {
+            Rectangle rectangle = (Rectangle) node;
+            int row = GridPane.getRowIndex(rectangle);
+            int column = GridPane.getColumnIndex(rectangle);
+            // Ignore wall padding entries
+            if (row == 0 || row == gridRows - 1 || column == 0 || column == gridColumns - 1) {
+                continue;
+            } else {
+                Entity entity;
+                Paint rectangleColor = rectangle.getFill();
+                //if (rectangleColor.equals(Color.GRAY))
+            }
+
+        }
+        return battle;
     }
 
     //////////////////////////////////////////// HELPER METHODS ////////////////////////////////////////////
 
     /**
-     * Takes in a battle object and populates GridPane according to the information in battle.
-     * @param battle Battle to be represented in the GridPane
+     * Populates GridPane according to the information in battle attribute.
      */
-    private void populateGridPane(Battle battle){
-        System.out.println(battle.battleString());
+    private void populateGridPane(){
+        System.out.println(this.battle.battleString());
         // Clear previous content of grid pane if needed
         gridPane.getChildren().clear();
 
         // Get gridpane
-        int rows = battle.getRows() + 2;
-        int columns = battle.getColumns() + 2;
+        int rows = this.battle.getRows() + 2;
+        int columns = this.battle.getColumns() + 2;
 
         for (int row = 0; row < rows; row++) {
             for (int column = 0; column < columns; column++) {
@@ -195,7 +229,7 @@ public class MainController {
                     rectangle = new Rectangle(50, 50, Color.GRAY);
                 } else {
                     // Indices in grid pane are increased by one due to padding of columns and rows.
-                    Entity entity = battle.getEntity(row - 1, column - 1);
+                    Entity entity = this.battle.getEntity(row - 1, column - 1);
                     rectangle = new Rectangle(50,50);
                     switch (entity) {
                         case null -> rectangle.setFill(Color.WHITE);

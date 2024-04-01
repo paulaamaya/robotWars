@@ -68,6 +68,8 @@ public class Writer {
                     writer.write(sb.toString());
                 }
 
+                // Close writer
+                writer.close();
             }
         } catch (IOException e){
             throw new UncheckedIOException("Problem writing battle to file " + filepath, e);
