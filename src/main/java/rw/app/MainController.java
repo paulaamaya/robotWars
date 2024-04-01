@@ -1,5 +1,7 @@
 package rw.app;
 
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 import rw.battle.Battle;
 import javafx.fxml.FXML;
 import javafx.event.ActionEvent;
@@ -12,6 +14,10 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
+import rw.enums.WeaponType;
+import rw.util.Reader;
+
+import java.io.File;
 
 public class MainController {
 
@@ -67,7 +73,7 @@ public class MainController {
     private TextField predaconSymbolInput;
 
     @FXML
-    private ChoiceBox<?> predaconWeaponTypeInput;
+    private ChoiceBox<String> predaconWeaponTypeInput;
 
     @FXML
     private TextField predaconXInput;
@@ -88,7 +94,7 @@ public class MainController {
     private Label statusLabel;
 
     @FXML
-    private TextField wolrldRowsInput;
+    private TextField worldRowsInput;
 
     @FXML
     private TextField worldColumnsInput;
@@ -103,12 +109,32 @@ public class MainController {
     private Color x4;
 
     @FXML
+    public void initialize(){
+        // Add weapons to predacon weapons choice box
+        for (WeaponType weapon: WeaponType.values()){
+            predaconWeaponTypeInput.getItems().add(weapon.name());
+        }
+    }
+
+    @FXML
     void aboutHandler(ActionEvent event) {
 
     }
 
     @FXML
     void loadHandler(ActionEvent event) {
+        // Prompt user to select file
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Open File");
+        Stage stage = (Stage) loadButton.getParentPopup().getOwnerWindow();
+        File sourceFile = fileChooser.showOpenDialog(stage);
+        // Read in source file
+        try{
+            Battle battle = Reader.loadBattle(sourceFile);
+            // TODO: Populate world according to battle info.
+        } catch (RuntimeException e){
+            statusLabel.setText(e.getMessage());
+        }
 
     }
 

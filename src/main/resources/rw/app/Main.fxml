@@ -18,7 +18,6 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
 <VBox prefHeight="900.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="rw.app.MainController">
@@ -59,7 +58,7 @@
                         </Label>
                         <Label layoutX="20.0" layoutY="101.0" text="Rows" />
                         <Label layoutX="20.0" layoutY="132.0" text="Columns" />
-                        <TextField fx:id="wolrldRowsInput" layoutX="81.0" layoutY="97.0" prefHeight="25.0" prefWidth="123.0" />
+                        <TextField fx:id="worldRowsInput" layoutX="81.0" layoutY="97.0" prefHeight="25.0" prefWidth="123.0" />
                         <TextField fx:id="worldColumnsInput" layoutX="81.0" layoutY="128.0" prefHeight="25.0" prefWidth="123.0" />
                         <Button fx:id="newWorldButton" layoutX="79.0" layoutY="165.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="123.0" text="Create a New World" />
                         <Label layoutX="14.0" layoutY="217.0" text="PredaCon">
@@ -137,11 +136,8 @@
       <children>
         <Label fx:id="statusLabel" maxHeight="1.7976931348623157E308" maxWidth="-1.0" text="Status" HBox.hgrow="ALWAYS">
           <font>
-            <Font size="11.0" fx:id="x3" />
+            <Font name="Candara" size="12.0" fx:id="x3" />
           </font>
-          <textFill>
-            <Color red="0.625" green="0.625" blue="0.625" fx:id="x4" />
-          </textFill>
         </Label>
       </children>
       <padding>
