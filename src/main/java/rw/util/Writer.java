@@ -9,16 +9,23 @@ import java.io.IOException;
 import java.io.UncheckedIOException;
 
 /**
- * Class to writing to a battle file that has been edited using GUI.
+ * The Writer class provides static methods for writing data to a file based on a given Battle object.
  *
  * @author Paula Amaya
  * @email paula.amaya@ucalgary.ca
- * @version 1.0
  * @tutorial 09
+ * @date April 1, 2024
  */
+
 public class Writer {
 
-    public void writeBattleToFile(Battle battle, String filepath){
+    /**
+     * Takes in a battle object and a file path.  It attempts to write in the given path the information
+     * about the battle object as outlined in the assignment description,
+     * @param battle Battle to document in .txt file
+     * @param filepath Location to place .txt file
+     */
+    public static void writeBattleToFile(Battle battle, String filepath){
         try(BufferedWriter writer = new BufferedWriter(new FileWriter(filepath))) {
             int battleRows = battle.getRows();
             int battleCols = battle.getColumns();
