@@ -12,7 +12,7 @@ import javafx.scene.paint.Paint;
  * @date April 1, 2024
  */
 public enum Colors {
-    EMPTY(Color.WHITE), WALL(Color.GRAY), PREDACON(Color.RED), MAXIMAL(Color.BLUE);
+    EMPTY(Color.WHITE), WALL(Color.GRAY), PREDACON(Color.LIGHTPINK), MAXIMAL(Color.LIGHTBLUE);
     private final Paint color;
 
 

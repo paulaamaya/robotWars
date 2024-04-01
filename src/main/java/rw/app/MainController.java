@@ -1,9 +1,11 @@
 package rw.app;
 
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.text.TextAlignment;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import rw.battle.Battle;
@@ -15,6 +17,7 @@ import javafx.scene.text.Font;
 import rw.battle.Entity;
 import rw.battle.Maximal;
 import rw.battle.Wall;
+import rw.enums.Colors;
 import rw.enums.WeaponType;
 import rw.util.Reader;
 import java.io.File;
@@ -224,25 +227,43 @@ public class MainController {
         for (int row = 0; row < rows; row++) {
             for (int column = 0; column < columns; column++) {
                 Rectangle rectangle;
+                Label label = new Label();
+                label.setFont(new Font("Candara", 12));
+                label.setTextAlignment(TextAlignment.CENTER);
                 // Pad the perimeter with walls
                 if (row == 0 || row == rows - 1 || column == 0 || column == columns - 1) {
-                    rectangle = new Rectangle(50, 50, Color.GRAY);
+                    rectangle = new Rectangle(50, 50, Colors.WALL.getColor());
+                    label.setText("#");
                 } else {
                     // Indices in grid pane are increased by one due to padding of columns and rows.
                     Entity entity = this.battle.getEntity(row - 1, column - 1);
                     rectangle = new Rectangle(50,50);
                     switch (entity) {
-                        case null -> rectangle.setFill(Color.WHITE);
-                        case Wall wall -> rectangle.setFill(Color.GRAY);
-                        case Maximal maximal ->
-                                rectangle.setFill(Color.BLUE);
-                        default -> rectangle.setFill(Color.RED);
+                        case null -> {
+                            rectangle.setFill(Colors.EMPTY.getColor());
+                        }
+                        case Wall wall -> {
+                            rectangle.setFill(Colors.WALL.getColor());
+                            label.setText(String.valueOf(entity.getSymbol()));
+                        }
+                        case Maximal maximal -> {
+                            rectangle.setFill(Colors.MAXIMAL.getColor());
+                            label.setText(String.valueOf(entity.getSymbol()));
+                        }
+                        default -> {
+                            rectangle.setFill(Colors.PREDACON.getColor());
+                            label.setText(String.valueOf(entity.getSymbol()));
+                        }
                     }
                 }
                 // Set black outline for rectangles
                 rectangle.setStroke(Color.BLACK);
-                // Add rectangle to pane
+                // Add rectangle and label to pane
                 gridPane.add(rectangle, column, row);
+                gridPane.add(label, column, row);
+                // Center label in grid
+                GridPane.setHalignment(label, Pos.CENTER.getHpos());
+                GridPane.setValignment(label, Pos.CENTER.getVpos());
             }
         }
 
