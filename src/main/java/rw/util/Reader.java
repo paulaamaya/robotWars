@@ -28,8 +28,7 @@ public final class Reader {
     public static Battle loadBattle(File file) {
         Battle battle;
 
-        try{
-            BufferedReader reader = new BufferedReader(new FileReader(file));
+        try(BufferedReader reader = new BufferedReader(new FileReader(file));){
 
             // BATTLE DIMENSIONS
             // Read first line as rows
@@ -127,6 +126,8 @@ public final class Reader {
                 line = reader.readLine();
             }
 
+            // Close reader
+            reader.close();
         } catch (IOException e){
             throw new UncheckedIOException("Problem reading file " + file.getName(), e);
         } catch (NumberFormatException e){

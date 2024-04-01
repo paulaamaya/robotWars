@@ -14,7 +14,7 @@ class ReaderTest {
 
     @Test
     public void loadBattleTest() {
-        File file = new File("battle_test.txt");
+        File file = new File("battle.txt");
         Battle battle = Reader.loadBattle(file);
         assertInstanceOf(PredaCon.class, battle.getEntity(0,0));
         assertInstanceOf(Wall.class, battle.getEntity(2,0));

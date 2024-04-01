@@ -122,7 +122,9 @@ public class MainController {
         for (WeaponType weapon: WeaponType.values()){
             predaconWeaponTypeInput.getItems().add(weapon.name());
         }
-        //
+        // Load with an empty 3 x 3 battle
+        Battle battle = new Battle(3, 3);
+        populateGridPane(battle);
     }
 
     @FXML
