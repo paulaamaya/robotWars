@@ -28,8 +28,7 @@ public final class Reader {
     public static Battle loadBattle(File file) {
         Battle battle;
 
-        try{
-            BufferedReader reader = new BufferedReader(new FileReader(file));
+        try(BufferedReader reader = new BufferedReader(new FileReader(file));){
 
             // BATTLE DIMENSIONS
             // Read first line as rows
@@ -136,10 +135,20 @@ public final class Reader {
         return battle;
     }
 
+    /**
+     * Takes in a string a determines if it is a valid symbol for a Predacon weapon.
+     * @param weapon String representing a potential Predacon weapon.
+     * @return true iff weapon is a valid symbol for a Predacon weapon.
+     */
     private static boolean isValidWeapon(String weapon) {
         return weapon.equals("C") || weapon.equals("L") || weapon.equals("T");
     }
 
+    /**
+     * Takes in a String in uppercase and determines if it is a valid Entity type.
+     * @param type String representing a potential Entity type.
+     * @return true iff type is a valid Entity.
+     */
     private static boolean isValidEntityType(String type){
         return type.equals("WALL") || type.equals("PREDACON") || type.equals("MAXIMAL");
     }
