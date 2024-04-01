@@ -1,17 +1,130 @@
 package rw.app;
 
-import javafx.fxml.FXML;
 import rw.battle.Battle;
+import javafx.fxml.FXML;
+import javafx.event.ActionEvent;
+import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.Label;
+import javafx.scene.control.MenuItem;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.GridPane;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 
 public class MainController {
 
-    //Store the data of editor
-    private Battle battle;
-
-    /**
-     * Set up the window state
-     */
     @FXML
-    public void initialize() {
+    private MenuItem aboutButton;
+
+    @FXML
+    private TextArea detailsOutput;
+
+    @FXML
+    private GridPane gridPane;
+
+    @FXML
+    private MenuItem loadButton;
+
+    @FXML
+    private TextField maximalArmorStrengthInput;
+
+    @FXML
+    private TextField maximalHealthInput;
+
+    @FXML
+    private TextField maximalNameInput;
+
+    @FXML
+    private TextField maximalSymbolInput;
+
+    @FXML
+    private TextField maximalWeaponStrengthInput;
+
+    @FXML
+    private TextField maximalXInput;
+
+    @FXML
+    private TextField maximalYInput;
+
+    @FXML
+    private Button newMaximalButton;
+
+    @FXML
+    private Button newPredaconButton;
+
+    @FXML
+    private Button newWorldButton;
+
+    @FXML
+    private TextField predaconHealthInput;
+
+    @FXML
+    private TextField predaconNameInput;
+
+    @FXML
+    private TextField predaconSymbolInput;
+
+    @FXML
+    private ChoiceBox<?> predaconWeaponTypeInput;
+
+    @FXML
+    private TextField predaconXInput;
+
+    @FXML
+    private TextField predaconYInput;
+
+    @FXML
+    private MenuItem quitButton;
+
+    @FXML
+    private MenuItem saveAsButton;
+
+    @FXML
+    private MenuItem saveButton;
+
+    @FXML
+    private Label statusLabel;
+
+    @FXML
+    private TextField wolrldRowsInput;
+
+    @FXML
+    private TextField worldColumnsInput;
+
+    @FXML
+    private Font x1;
+
+    @FXML
+    private Font x3;
+
+    @FXML
+    private Color x4;
+
+    @FXML
+    void aboutHandler(ActionEvent event) {
+
     }
+
+    @FXML
+    void loadHandler(ActionEvent event) {
+
+    }
+
+    @FXML
+    void quitHandler(ActionEvent event) {
+
+    }
+
+    @FXML
+    void saveAsHandler(ActionEvent event) {
+
+    }
+
+    @FXML
+    void saveHandler(ActionEvent event) {
+
+    }
+
 }

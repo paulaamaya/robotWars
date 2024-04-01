@@ -27,16 +27,16 @@
       <menus>
         <Menu mnemonicParsing="false" text="File">
           <items>
-            <MenuItem fx:id="loadButton" mnemonicParsing="false" text="Load World" />
-            <MenuItem fx:id="saveButton" mnemonicParsing="false" text="Save" />
-            <MenuItem fx:id="saveAsButton" mnemonicParsing="false" text="Save As..." />
+            <MenuItem fx:id="loadButton" mnemonicParsing="false" onAction="#loadHandler" text="Load World" />
+            <MenuItem fx:id="saveButton" mnemonicParsing="false" onAction="#saveHandler" text="Save" />
+            <MenuItem fx:id="saveAsButton" mnemonicParsing="false" onAction="#saveAsHandler" text="Save As..." />
             <SeparatorMenuItem mnemonicParsing="false" />
-            <MenuItem fx:id="quitButton" mnemonicParsing="false" text="Quit" />
+            <MenuItem fx:id="quitButton" mnemonicParsing="false" onAction="#quitHandler" text="Quit" />
           </items>
         </Menu>
         <Menu mnemonicParsing="false" text="Help">
           <items>
-            <MenuItem fx:id="aboutButton" mnemonicParsing="false" text="Robot Wars World Editor" />
+            <MenuItem fx:id="aboutButton" mnemonicParsing="false" onAction="#aboutHandler" text="Robot Wars World Editor" />
           </items>
         </Menu>
       </menus>
@@ -59,8 +59,8 @@
                         </Label>
                         <Label layoutX="20.0" layoutY="101.0" text="Rows" />
                         <Label layoutX="20.0" layoutY="132.0" text="Columns" />
-                        <TextField fx:id="rowsInput" layoutX="81.0" layoutY="97.0" prefHeight="25.0" prefWidth="123.0" />
-                        <TextField fx:id="columnsInput" layoutX="81.0" layoutY="128.0" prefHeight="25.0" prefWidth="123.0" />
+                        <TextField fx:id="wolrldRowsInput" layoutX="81.0" layoutY="97.0" prefHeight="25.0" prefWidth="123.0" />
+                        <TextField fx:id="worldColumnsInput" layoutX="81.0" layoutY="128.0" prefHeight="25.0" prefWidth="123.0" />
                         <Button fx:id="newWorldButton" layoutX="79.0" layoutY="165.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="123.0" text="Create a New World" />
                         <Label layoutX="14.0" layoutY="217.0" text="PredaCon">
                            <font>
@@ -69,17 +69,17 @@
                         </Label>
                         <Label layoutX="18.0" layoutY="249.0" text="Symbol" />
                         <Label layoutX="18.0" layoutY="280.0" text="Name" />
-                        <TextField fx:id="rowsInput1" layoutX="79.0" layoutY="245.0" prefHeight="25.0" prefWidth="123.0" />
-                        <TextField fx:id="columnsInput1" layoutX="79.0" layoutY="276.0" prefHeight="25.0" prefWidth="123.0" />
-                        <Button fx:id="newWorldButton1" layoutX="78.0" layoutY="441.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="123.0" text="Create Predacon" />
+                        <TextField fx:id="predaconSymbolInput" layoutX="79.0" layoutY="245.0" prefHeight="25.0" prefWidth="123.0" />
+                        <TextField fx:id="predaconNameInput" layoutX="79.0" layoutY="276.0" prefHeight="25.0" prefWidth="123.0" />
+                        <Button fx:id="newPredaconButton" layoutX="78.0" layoutY="441.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="123.0" text="Create Predacon" />
                         <Label layoutX="17.0" layoutY="310.0" text="Health" />
-                        <TextField fx:id="columnsInput11" layoutX="79.0" layoutY="306.0" prefHeight="25.0" prefWidth="123.0" />
+                        <TextField fx:id="predaconHealthInput" layoutX="79.0" layoutY="306.0" prefHeight="25.0" prefWidth="123.0" />
                         <Label layoutX="16.0" layoutY="342.0" text="Weapon" />
-                        <ChoiceBox layoutX="79.0" layoutY="338.0" prefHeight="25.0" prefWidth="123.0" />
+                        <ChoiceBox fx:id="predaconWeaponTypeInput" layoutX="79.0" layoutY="338.0" prefHeight="25.0" prefWidth="123.0" />
                         <Label layoutX="17.0" layoutY="374.0" text="X-Coord" />
                         <Label layoutX="17.0" layoutY="405.0" text="Y-Coord" />
-                        <TextField fx:id="rowsInput11" layoutX="78.0" layoutY="370.0" prefHeight="25.0" prefWidth="123.0" />
-                        <TextField fx:id="columnsInput12" layoutX="78.0" layoutY="401.0" prefHeight="25.0" prefWidth="123.0" />
+                        <TextField fx:id="predaconXInput" layoutX="78.0" layoutY="370.0" prefHeight="25.0" prefWidth="123.0" />
+                        <TextField fx:id="predaconYInput" layoutX="78.0" layoutY="401.0" prefHeight="25.0" prefWidth="123.0" />
                         <Label layoutX="16.0" layoutY="495.0" text="Maximal">
                            <font>
                               <Font name="Candara" size="15.0" />
@@ -87,19 +87,19 @@
                         </Label>
                         <Label layoutX="20.0" layoutY="527.0" text="Symbol" />
                         <Label layoutX="20.0" layoutY="558.0" text="Name" />
-                        <TextField fx:id="rowsInput12" layoutX="81.0" layoutY="523.0" prefHeight="25.0" prefWidth="123.0" />
-                        <TextField fx:id="columnsInput13" layoutX="81.0" layoutY="554.0" prefHeight="25.0" prefWidth="123.0" />
-                        <Button fx:id="newWorldButton11" layoutX="80.0" layoutY="749.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="123.0" text="Create Maximal" />
+                        <TextField fx:id="maximalSymbolInput" layoutX="81.0" layoutY="523.0" prefHeight="25.0" prefWidth="123.0" />
+                        <TextField fx:id="maximalNameInput" layoutX="81.0" layoutY="554.0" prefHeight="25.0" prefWidth="123.0" />
+                        <Button fx:id="newMaximalButton" layoutX="80.0" layoutY="749.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="123.0" text="Create Maximal" />
                         <Label layoutX="19.0" layoutY="588.0" text="Health" />
-                        <TextField fx:id="columnsInput111" layoutX="81.0" layoutY="584.0" prefHeight="25.0" prefWidth="123.0" />
+                        <TextField fx:id="maximalHealthInput" layoutX="81.0" layoutY="584.0" prefHeight="25.0" prefWidth="123.0" />
                         <Label layoutX="18.0" layoutY="620.0" text="Weapon" />
                         <Label layoutX="19.0" layoutY="684.0" text="X-Coord" />
                         <Label layoutX="19.0" layoutY="715.0" text="Y-Coord" />
-                        <TextField fx:id="rowsInput111" layoutX="81.0" layoutY="680.0" prefHeight="25.0" prefWidth="123.0" />
-                        <TextField fx:id="columnsInput121" layoutX="81.0" layoutY="711.0" prefHeight="25.0" prefWidth="123.0" />
-                        <TextField fx:id="columnsInput1111" layoutX="81.0" layoutY="616.0" prefHeight="25.0" prefWidth="123.0" />
+                        <TextField fx:id="maximalXInput" layoutX="81.0" layoutY="680.0" prefHeight="25.0" prefWidth="123.0" />
+                        <TextField fx:id="maximalYInput" layoutX="81.0" layoutY="711.0" prefHeight="25.0" prefWidth="123.0" />
+                        <TextField fx:id="maximalWeaponStrengthInput" layoutX="81.0" layoutY="616.0" prefHeight="25.0" prefWidth="123.0" />
                         <Label layoutX="17.0" layoutY="652.0" text="Armor" />
-                        <TextField fx:id="columnsInput11111" layoutX="80.0" layoutY="648.0" prefHeight="25.0" prefWidth="123.0" />
+                        <TextField fx:id="maximalArmorStrengthInput" layoutX="80.0" layoutY="648.0" prefHeight="25.0" prefWidth="123.0" />
                 </children>
               </AnchorPane>
                </content>
@@ -109,7 +109,7 @@
             <AnchorPane id="Content" minHeight="-1.0" minWidth="-1.0" prefHeight="835.0" prefWidth="589.0">
               <children>
                 <Label alignment="CENTER" font="$x1" layoutX="275.0" layoutY="14.0" style="&#10;" text="View" textAlignment="CENTER" textFill="#675959" wrapText="false" />
-                        <GridPane gridLinesVisible="true" layoutX="194.0" layoutY="78.0">
+                        <GridPane fx:id="gridPane" gridLinesVisible="true" layoutX="195.0" layoutY="120.0">
                           <columnConstraints>
                             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -120,6 +120,7 @@
                             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                           </rowConstraints>
                         </GridPane>
+                        <Label layoutX="52.0" layoutY="64.0" text="To remove an entity in the world below, please right click on the entity you want to remove." />
               </children>
             </AnchorPane>
           </content>
