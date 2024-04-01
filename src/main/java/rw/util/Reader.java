@@ -5,10 +5,12 @@ import rw.battle.Battle;
 import java.io.File;
 
 /**
- * Class to assist reading in battle file
+ * Class to assist reading in battle file.
  *
- * @author Jonathan Hudson
+ * @author Paula Amaya
+ * @email paula.amaya@ucalgary.ca
  * @version 1.0
+ * @tutorial 09
  */
 public final class Reader {
 
