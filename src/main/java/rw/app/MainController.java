@@ -312,11 +312,68 @@ public class MainController {
 
     }
 
+    /**
+     * Click event handler for Create New Maximal button.  Verifies correctness of input and creates a new
+     * Maximal entity in Battle object in given position.
+     * @param event Click event for Create New Maximal button.
+     */
     @FXML
     void newMaximalHandler(ActionEvent event) {
+        try {
+            // Read all input fields
+            String name = maximalNameInput.getText();
+            String symbol = maximalSymbolInput.getText();
+            int health = Integer.parseInt(maximalHealthInput.getText());
+            int weaponStrength = Integer.parseInt(maximalWeaponStrengthInput.getText());
+            int armourStrength = Integer.parseInt(maximalArmorStrengthInput.getText());
+            int x = Integer.parseInt(maximalXInput.getText());
+            int y = Integer.parseInt(maximalYInput.getText());
+
+            // Verify fields are not empty
+            if (name.isEmpty() || symbol.isEmpty()){
+                throw new IllegalArgumentException("Please fill in all required Maximal fields.");
+            }
+
+            // Verify symbol is char
+            if(symbol.length() != 1){
+                throw new IllegalArgumentException("Please enter a single character for Maximal symbol.");
+            }
+
+            // Verify health is non-negative
+            if(health < 0){
+                throw new IllegalArgumentException("Please enter a non-negative integer for Maximal health.");
+            }
+
+            // Verify coordinates are valid
+            if(!this.battle.valid(y,x)){
+                throw new IllegalArgumentException("Please enter a Maximal coordinate that is within world bounds.");
+            }
+
+            // Add maximal to battle
+            Maximal maximal = new Maximal(symbol.charAt(0), name, health, weaponStrength, armourStrength);
+            this.battle.addEntity(y, x, maximal);
+
+            // Populate grid
+            populateGridPane();
+
+            // Update status
+            statusLabel.setText("Added Maximal " + name + " in row " + y + ", column " + x + ".");
+
+            // Reset all input fields
+            resetMaximalInputFields();
+        } catch (NumberFormatException e){
+            statusLabel.setText("Please enter integers for Maximal health, weapon strength, armour strength, x-coord, and y-coord.");
+        } catch (IllegalArgumentException e){
+            statusLabel.setText(e.getMessage());
+        }
 
     }
 
+    /**
+     * Click event handler for Create New PredaCon button.  Verifies correctness of input and creates a new
+     * PredaCon entity in Battle object in given position.
+     * @param event Click event for Create New PredaCon button.
+     */
     @FXML
     void newPredaconHandler(ActionEvent event) {
         try {
@@ -368,6 +425,11 @@ public class MainController {
         }
     }
 
+    /**
+     * Click event handler for Create New World button.  Verifies correctness of input and creates a new
+     * Battle attribute of given size.
+     * @param event Click event for Create New World button.
+     */
     @FXML
     void newWorldHandler(ActionEvent event) {
         try {
@@ -459,6 +521,9 @@ public class MainController {
         }
     }
 
+    /**
+     * Resets all input fields related to PredaCons.
+     */
     private void resetPredaconInputFields(){
         predaconSymbolInput.clear();
         predaconNameInput.clear();
@@ -466,6 +531,19 @@ public class MainController {
         predaconWeaponTypeInput.setValue(null);
         predaconXInput.clear();
         predaconYInput.clear();
+    }
+
+    /**
+     * Resets all input fields related to Maximals.
+     */
+    private void resetMaximalInputFields(){
+        maximalSymbolInput.clear();
+        maximalNameInput.clear();
+        maximalHealthInput.clear();
+        maximalWeaponStrengthInput.clear();
+        maximalArmorStrengthInput.clear();
+        maximalXInput.clear();
+        maximalYInput.clear();
     }
 
 }

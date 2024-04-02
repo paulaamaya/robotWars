@@ -7,6 +7,15 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+/**
+ * Main class used for launching Robot Wars World Editor.
+ *
+ * @author Paula Amaya
+ * @email paula.amaya@ucalgary.ca
+ * @tutorial 09
+ * @date April 1, 2024
+ */
+
 public class Main extends Application {
 
     public static final String version = "1.0";
