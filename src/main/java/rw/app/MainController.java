@@ -227,6 +227,10 @@ public class MainController {
         statusLabel.setText("Successfully saved world to world.txt");
     }
 
+    /**
+     * Displays Node details in details TextArea when mouse enters the node.
+     * @param event Mouse entering the node.
+     */
     @FXML
     void gridMouseEnterHandler(MouseEvent event){
         // Get GridPane row and column index of the clicked node
@@ -275,6 +279,10 @@ public class MainController {
         }
     }
 
+    /**
+     * Clear information displayed in details TextArea when mouse exits a GridPane node.
+     * @param event Mouse leaving the GridPane node.
+     */
     @FXML
     void gridMouseExitHandler(MouseEvent event){
         detailsOutput.clear();
@@ -302,6 +310,37 @@ public class MainController {
             populateGridPane();
         }
 
+    }
+
+    @FXML
+    void newMaximalHandler(ActionEvent event) {
+
+    }
+
+    @FXML
+    void newPredaconHandler(ActionEvent event) {
+
+    }
+
+    @FXML
+    void newWorldHandler(ActionEvent event) {
+        try {
+            int rows = Integer.parseInt(worldRowsInput.getText());
+            int columns = Integer.parseInt(worldColumnsInput.getText());
+
+            if(rows < 0 || columns < 0){
+                throw new IllegalArgumentException("Rows and columns cannot be negative integers");
+            }
+
+            // Create new battle object of corresponding size
+            this.battle = new Battle(rows, columns);
+            // Populate grid
+            populateGridPane();
+        } catch (NumberFormatException e){
+            statusLabel.setText("Please enter integer values for rows and columns");
+        } catch (IllegalArgumentException e){
+            statusLabel.setText(e.getMessage());
+        }
     }
 
     //////////////////////////////////////////// HELPER METHODS ////////////////////////////////////////////
