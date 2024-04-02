@@ -444,6 +444,9 @@ public class MainController {
             this.battle = new Battle(rows, columns);
             // Populate grid
             populateGridPane();
+
+            // Reset input fields
+            resetWorldInputFields();
         } catch (NumberFormatException e){
             statusLabel.setText("Please enter integer values for rows and columns.");
         } catch (IllegalArgumentException e){
@@ -519,6 +522,14 @@ public class MainController {
             // Add right-click handler
             node.setOnContextMenuRequested(this::gridClickHandler);
         }
+    }
+
+    /**
+     * Resets all input fields related to world size.
+     */
+    private void resetWorldInputFields(){
+        worldColumnsInput.clear();
+        worldRowsInput.clear();
     }
 
     /**
