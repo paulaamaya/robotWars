@@ -298,6 +298,8 @@ public class MainController {
         if(!(row == 0 || row == rows - 1 || column == 0 || column == columns - 1)){
             // Remove entity
             this.battle.addEntity(row - 1, column - 1, null);
+            // Update status
+            statusLabel.setText("Removed entity at row " + (row - 1) + ", column " + (column - 1));
             // Repopulate grid
             populateGridPane();
         }
