@@ -227,6 +227,10 @@ public class MainController {
         statusLabel.setText("Successfully saved world to world.txt");
     }
 
+    /**
+     * Displays Node details in details TextArea when mouse enters the node.
+     * @param event Mouse entering the node.
+     */
     @FXML
     void gridMouseEnterHandler(MouseEvent event){
         // Get GridPane row and column index of the clicked node
@@ -275,6 +279,10 @@ public class MainController {
         }
     }
 
+    /**
+     * Clear information displayed in details TextArea when mouse exits a GridPane node.
+     * @param event Mouse leaving the GridPane node.
+     */
     @FXML
     void gridMouseExitHandler(MouseEvent event){
         detailsOutput.clear();
@@ -302,6 +310,148 @@ public class MainController {
             populateGridPane();
         }
 
+    }
+
+    /**
+     * Click event handler for Create New Maximal button.  Verifies correctness of input and creates a new
+     * Maximal entity in Battle object in given position.
+     * @param event Click event for Create New Maximal button.
+     */
+    @FXML
+    void newMaximalHandler(ActionEvent event) {
+        try {
+            // Read all input fields
+            String name = maximalNameInput.getText();
+            String symbol = maximalSymbolInput.getText();
+            int health = Integer.parseInt(maximalHealthInput.getText());
+            int weaponStrength = Integer.parseInt(maximalWeaponStrengthInput.getText());
+            int armourStrength = Integer.parseInt(maximalArmorStrengthInput.getText());
+            int x = Integer.parseInt(maximalXInput.getText());
+            int y = Integer.parseInt(maximalYInput.getText());
+
+            // Verify fields are not empty
+            if (name.isEmpty() || symbol.isEmpty()){
+                throw new IllegalArgumentException("Please fill in all required Maximal fields.");
+            }
+
+            // Verify symbol is char
+            if(symbol.length() != 1){
+                throw new IllegalArgumentException("Please enter a single character for Maximal symbol.");
+            }
+
+            // Verify health is non-negative
+            if(health < 0){
+                throw new IllegalArgumentException("Please enter a non-negative integer for Maximal health.");
+            }
+
+            // Verify coordinates are valid
+            if(!this.battle.valid(y,x)){
+                throw new IllegalArgumentException("Please enter a Maximal coordinate that is within world bounds.");
+            }
+
+            // Add maximal to battle
+            Maximal maximal = new Maximal(symbol.charAt(0), name, health, weaponStrength, armourStrength);
+            this.battle.addEntity(y, x, maximal);
+
+            // Populate grid
+            populateGridPane();
+
+            // Update status
+            statusLabel.setText("Added Maximal " + name + " in row " + y + ", column " + x + ".");
+
+            // Reset all input fields
+            resetMaximalInputFields();
+        } catch (NumberFormatException e){
+            statusLabel.setText("Please enter integers for Maximal health, weapon strength, armour strength, x-coord, and y-coord.");
+        } catch (IllegalArgumentException e){
+            statusLabel.setText(e.getMessage());
+        }
+
+    }
+
+    /**
+     * Click event handler for Create New PredaCon button.  Verifies correctness of input and creates a new
+     * PredaCon entity in Battle object in given position.
+     * @param event Click event for Create New PredaCon button.
+     */
+    @FXML
+    void newPredaconHandler(ActionEvent event) {
+        try {
+            // Read all input fields
+            String name = predaconNameInput.getText();
+            String symbol = predaconSymbolInput.getText();
+            int health = Integer.parseInt(predaconHealthInput.getText());
+            int x = Integer.parseInt(predaconXInput.getText());
+            int y = Integer.parseInt(predaconYInput.getText());
+            String weaponType = predaconWeaponTypeInput.getValue();
+
+            // Verify fields are not empty
+            if (name.isEmpty() || symbol.isEmpty() || weaponType == null){
+                throw new IllegalArgumentException("Please fill in all required PredaCon fields.");
+            }
+
+            // Verify symbol is char
+            if(symbol.length() != 1){
+                throw new IllegalArgumentException("Please enter a single character for PredaCon symbol.");
+            }
+
+            // Verify health is non-negative
+            if(health < 0){
+                throw new IllegalArgumentException("Please enter a non-negative integer for PredaCon health.");
+            }
+
+            // Verify coordinates are valid
+            if(!this.battle.valid(y,x)){
+                throw new IllegalArgumentException("Please enter a PredaCon coordinate that is within world bounds.");
+            }
+
+            // Add predacon to battle
+            WeaponType weapon = WeaponType.valueOf(weaponType);
+            PredaCon predaCon = new PredaCon(symbol.charAt(0), name, health, weapon);
+            this.battle.addEntity(y, x, predaCon);
+
+            // Populate grid
+            populateGridPane();
+
+            // Update status
+            statusLabel.setText("Added Predacon " + name + " in row " + y + ", column " + x + ".");
+
+            // Reset all input fields
+            resetPredaconInputFields();
+        } catch (NumberFormatException e){
+            statusLabel.setText("Please enter integers for PredaCon health, x-coord, and y-coord.");
+        } catch (IllegalArgumentException e){
+            statusLabel.setText(e.getMessage());
+        }
+    }
+
+    /**
+     * Click event handler for Create New World button.  Verifies correctness of input and creates a new
+     * Battle attribute of given size.
+     * @param event Click event for Create New World button.
+     */
+    @FXML
+    void newWorldHandler(ActionEvent event) {
+        try {
+            int rows = Integer.parseInt(worldRowsInput.getText());
+            int columns = Integer.parseInt(worldColumnsInput.getText());
+
+            if(rows < 0 || columns < 0){
+                throw new IllegalArgumentException("Rows and columns cannot be negative integers.");
+            }
+
+            // Create new battle object of corresponding size
+            this.battle = new Battle(rows, columns);
+            // Populate grid
+            populateGridPane();
+
+            // Reset input fields
+            resetWorldInputFields();
+        } catch (NumberFormatException e){
+            statusLabel.setText("Please enter integer values for rows and columns.");
+        } catch (IllegalArgumentException e){
+            statusLabel.setText(e.getMessage());
+        }
     }
 
     //////////////////////////////////////////// HELPER METHODS ////////////////////////////////////////////
@@ -372,6 +522,39 @@ public class MainController {
             // Add right-click handler
             node.setOnContextMenuRequested(this::gridClickHandler);
         }
+    }
+
+    /**
+     * Resets all input fields related to world size.
+     */
+    private void resetWorldInputFields(){
+        worldColumnsInput.clear();
+        worldRowsInput.clear();
+    }
+
+    /**
+     * Resets all input fields related to PredaCons.
+     */
+    private void resetPredaconInputFields(){
+        predaconSymbolInput.clear();
+        predaconNameInput.clear();
+        predaconHealthInput.clear();
+        predaconWeaponTypeInput.setValue(null);
+        predaconXInput.clear();
+        predaconYInput.clear();
+    }
+
+    /**
+     * Resets all input fields related to Maximals.
+     */
+    private void resetMaximalInputFields(){
+        maximalSymbolInput.clear();
+        maximalNameInput.clear();
+        maximalHealthInput.clear();
+        maximalWeaponStrengthInput.clear();
+        maximalArmorStrengthInput.clear();
+        maximalXInput.clear();
+        maximalYInput.clear();
     }
 
 }
