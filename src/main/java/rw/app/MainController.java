@@ -4,7 +4,8 @@ import javafx.application.Platform;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.*;
-import javafx.scene.paint.Paint;
+import javafx.scene.input.ContextMenuEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.FileChooser;
@@ -223,8 +224,36 @@ public class MainController {
         statusLabel.setText("Successfully saved world to world.txt");
     }
 
-    //////////////////////////////////////////// HELPER METHODS ////////////////////////////////////////////
+    @FXML
+    void gridMouseEnterHandler(MouseEvent event){
+        // TODO: Write method.
+    }
 
+    @FXML
+    void gridMouseExitHandler(MouseEvent event){
+        // TODO: Write method.
+    }
+
+    @FXML
+    void gridRightClickHandler(ContextMenuEvent event){
+        // Get GridPane row and column index of the clicked node
+        Node source = (Node) event.getSource();
+        int row = GridPane.getRowIndex(source);
+        int column = GridPane.getColumnIndex(source);
+
+        // If node is not a perimeter wall, then we proceed to remove it
+        int rows = this.battle.getRows() + 2;
+        int columns = this.battle.getColumns() + 2;
+        if(!(row == 0 || row == rows - 1 || column == 0 || column == columns - 1)){
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            String aboutInfo = "You removed the battle entry in row " + row + "and column " + column;
+            alert.setContentText(aboutInfo);
+            alert.show();
+        }
+
+    }
+
+    //////////////////////////////////////////// HELPER METHODS ////////////////////////////////////////////
     /**
      * Populates GridPane according to the information in battle attribute.
      */
@@ -270,7 +299,7 @@ public class MainController {
                         }
                     }
                 }
-                // Set black outline for rectangles
+                // Set black outline for rectangles and add handler
                 rectangle.setStroke(Color.BLACK);
                 // Add rectangle and label to pane
                 gridPane.add(rectangle, column, row);
@@ -281,6 +310,21 @@ public class MainController {
             }
         }
 
+        // Attach handlers to new grid
+        this.attachGridPaneHandlers();
+    }
+
+    /**
+     * Attaches handlers to every GridPane node.
+     */
+    private void attachGridPaneHandlers(){
+        for (Node node: gridPane.getChildren()){
+            // Add mouse handlers
+            node.setOnMouseEntered(this::gridMouseEnterHandler);
+            node.setOnMouseExited(this::gridMouseExitHandler);
+            // Add right-click handler
+            node.setOnContextMenuRequested(this::gridRightClickHandler);
+        }
     }
 
 }
