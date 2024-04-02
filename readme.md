@@ -35,6 +35,7 @@ To obtain additional information about the entity in a world map square, one may
 
 ## Running the Program
 
+### Running the World Editor
 In order to run this program you need to have the JavaFX SDK 21.0+ installed in your machine 
 ([download link](https://gluonhq.com/products/javafx/)) and Java SDK 21.0+ ([download link](https://jdk.java.net/21/)).  
 Please keep in mind the location where JavaFX is installed as it will be needed in the following steps:
@@ -49,6 +50,18 @@ java --module-path "C:\ProgramFiles\Java\javafx-sdk-21.0.1.lib" --add-modules ja
 ```bash
 java --module-path "C:\ProgramFiles\Java\javafx-sdk-21.0.1.lib" --add-modules javafx.controls, javafx.fxml -jar CPSC233A3.jar
 ```
+
+### Running the Game
+The actual game does not have a GUI at the moment.  However, if you want to see the robots have an actual battle in the
+world you created, you can run the command line version of the game using the following command:
+
+```bash
+java --module-path "C:\ProgramFiles\Java\javafx-sdk-21.0.1.lib" --add-modules javafx.controls, javafx.fxml rw.shell.Main battle.txt log.txt 12345
+```
+
+where:
+- `battle.txt` should be replaced with the file containing the world map you wish to use in the game.
+- `12345` should be replaced with the seed you wish to use to control the randomness used in the game.
 
 ## Creating a World Map
 
@@ -85,7 +98,7 @@ status bar will display the location where the entity was removed.
 
 ## Saving a World Map
 
-All the edits made in the Program UI can be saved to a `.txt` file of the specified format to be loaded in at a later time.
+All the edits made in the Program UI can be saved to a `.txt` file of the specified format to be loaded into the game.
 - The File > Save option saves the world map to the default `world.txt` file.
 - The File > Save As... option prompts you to choose a location as to where to save the file and what you wish to name it.
 
