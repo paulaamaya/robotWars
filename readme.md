@@ -41,11 +41,21 @@ over the desired square.
 
 ## Running the Program
 
-- Website link
-- Download java fx
-- Command line arguments
-- Run in terminal/GUI options
-- Running `.jar` file
+In order to run this program you need to have the JavaFX SDK 21.0+ installed in your
+machine ([download link](https://gluonhq.com/products/javafx/)) and Java SDK 
+21.0+ ([download link](https://jdk.java.net/21/)).  Please keep in mind
+the location where JavaFX is installed as it will be needed in the following steps:
+
+1. Download project files.
+2. Open your command line and navigate to the `CPSC233A3\target\classes` directory.
+3. Run the following command, replacing `"C:\ProgramFiles\Java\javafx-sdk-21.0.1.lib"` with the location of your local JavaFX install:
+```bash
+java --module-path "C:\ProgramFiles\Java\javafx-sdk-21.0.1.lib" --add-modules javafx.controls, javafx.fxml rw.app.Main
+```
+4. Alternatively, if you are running the program using a `.jar` file, you can run the following command:
+```bash
+java --module-path "C:\ProgramFiles\Java\javafx-sdk-21.0.1.lib" --add-modules javafx.controls, javafx.fxml -jar CPSC233A3.jar
+```
 
 ## Creating a World Map
 ## Editing a World Map
