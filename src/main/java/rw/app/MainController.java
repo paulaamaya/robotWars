@@ -235,7 +235,7 @@ public class MainController {
     }
 
     @FXML
-    void gridRightClickHandler(ContextMenuEvent event){
+    void gridClickHandler(ContextMenuEvent event){
         // Get GridPane row and column index of the clicked node
         Node source = (Node) event.getSource();
         int row = GridPane.getRowIndex(source);
@@ -245,10 +245,10 @@ public class MainController {
         int rows = this.battle.getRows() + 2;
         int columns = this.battle.getColumns() + 2;
         if(!(row == 0 || row == rows - 1 || column == 0 || column == columns - 1)){
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            String aboutInfo = "You removed the battle entry in row " + row + "and column " + column;
-            alert.setContentText(aboutInfo);
-            alert.show();
+            // Remove entity
+            this.battle.addEntity(row - 1, column - 1, null);
+            // Repopulate grid
+            populateGridPane();
         }
 
     }
@@ -323,7 +323,7 @@ public class MainController {
             node.setOnMouseEntered(this::gridMouseEnterHandler);
             node.setOnMouseExited(this::gridMouseExitHandler);
             // Add right-click handler
-            node.setOnContextMenuRequested(this::gridRightClickHandler);
+            node.setOnContextMenuRequested(this::gridClickHandler);
         }
     }
 
