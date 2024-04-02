@@ -211,7 +211,7 @@ public class MainController {
         }
 
         // Inform user writing was successful
-        statusLabel.setText("Successfully saved world to" + destinationFile.getPath());
+        statusLabel.setText("Successfully saved world to " + destinationFile.getPath());
     }
 
     /**
@@ -314,6 +314,8 @@ public class MainController {
             this.battle.addEntity(row - 1, column - 1, null);
             // Repopulate grid
             populateGridPane();
+            // Update status
+            statusLabel.setText("Removed entity at row " + (row - 1) + ", column " + (column -1));
         }
 
     }

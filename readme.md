@@ -12,39 +12,32 @@
 
 ## Project Overview
 
-This application is a world map editor for a Robot War simulation.  The world 
-map consists of a grid with m rows and n columns where each grid square can 
-be in exactly one of the following states:
+This application is a world map editor for a Robot War simulation.  The world map consists of a grid with m rows and 
+n columns where each grid square can be in exactly one of the following states:
 
 ![Map States](docs/map-legend.png)
 
-By default, the map is padded with a perimeter of walls to represent the world
-boundaries.
+By default, the map is padded with a perimeter of walls to represent the world boundaries.
 
-> **Notes:** This perimeter wall is a view-only feature.  Therefore, it cannot
-> be edited, should not be counted in coordinate calculations, and will not be
-> be saved in the world map data. (See [Saving a World Map](#saving-a-world-map)
+> **Notes:** This perimeter wall is a view-only feature.  Therefore, it cannot be edited, should not be counted in 
+> coordinate calculations, and will not be be saved in the world map data. (See [Saving a World Map](#saving-a-world-map)
 
-For our coordinate system we will use the convention `(row,col)` where `row` is
-the y-coordinate and `col` is the x-coordinate.
+For our coordinate system we will use the convention `(row,col)` where `row` is the y-coordinate and `col` is the x-coordinate.
 - Rows are numbered from top to bottom in increasing order, starting from `0`.
 - Columns are numbered from left to right in increading order, starting from `0`.
 - Perimeter walls are not counted in coordinates.
 
-For instance, the example below represents a `3 x 3` world with a PredaCon in 
-coordinate `(0,0)` and a Maximal in coordinate `(2,1)`.
+For instance, the example below represents a `3 x 3` world with a PredaCon in coordinate `(0,0)` and a Maximal in coordinate `(2,1)`.
 
 ![First Map Example](docs/ex-one-map.png)
 
-To obtain more information about the entity in a world map square, one may hover
-over the desired square.  
+To obtain additional information about the entity in a world map square, one may hover over the desired square.  
 
 ## Running the Program
 
-In order to run this program you need to have the JavaFX SDK 21.0+ installed in your
-machine ([download link](https://gluonhq.com/products/javafx/)) and Java SDK 
-21.0+ ([download link](https://jdk.java.net/21/)).  Please keep in mind
-the location where JavaFX is installed as it will be needed in the following steps:
+In order to run this program you need to have the JavaFX SDK 21.0+ installed in your machine 
+([download link](https://gluonhq.com/products/javafx/)) and Java SDK 21.0+ ([download link](https://jdk.java.net/21/)).  
+Please keep in mind the location where JavaFX is installed as it will be needed in the following steps:
 
 1. Download project files.
 2. Open your command line and navigate to the `CPSC233A3\target\classes` directory.
@@ -58,7 +51,44 @@ java --module-path "C:\ProgramFiles\Java\javafx-sdk-21.0.1.lib" --add-modules ja
 ```
 
 ## Creating a World Map
+
+By default, the application will load an empty 3x3 map.  You can create your own world map by entering desired dimensions 
+in the Master tab, under the World section.
+
+>Note: World dimensions must be non-negative integers.  Failure to enter the correct format in either filed will trigger
+> a warning in the status bar at the bottom of the page.
+
+![Enter new world dimension](docs/enter-world.png)
+
+Alternatively, you can load in a pre-defined world from a `.txt` file on your machine using File > Load World menu option.
+Note however that the `.txt` file must be of the specified format.
+
 ## Editing a World Map
 
+### Adding Entities
+
+Entities in a world map can be added using the Master tab.  Failure to provide the correct format in any of the fields 
+will trigger a warning in the status bar at the bottom of the page.
+
+![Adding a PredaCon](docs/enter-entity.png)
+
+After an entity has been successfully added, the status bar will display the name and location of the new entity.
+
+![Removing a PredaCon](docs/enter-entity-status.png)
+
+### Removing Entities
+
+To remove an entity, simply right click its position on the grid.  After an entity has been successfully deleted, the 
+status bar will display the location where the entity was removed.
+
+![Removing an Entity](docs/remove-entity-status.png)
 
 ## Saving a World Map
+
+All the edits made in the Program UI can be saved to a `.txt` file of the specified format to be loaded in at a later time.
+- The File > Save option saves the world map to the default `world.txt` file.
+- The File > Save As... option prompts you to choose a location as to where to save the file and what you wish to name it.
+
+If file was saved successfully, the status bar will report the location of the saved file.
+
+![Saving to a File](docs/save-status.png)
