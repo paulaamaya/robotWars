@@ -10,16 +10,14 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import rw.battle.Battle;
+import rw.battle.*;
 import javafx.fxml.FXML;
 import javafx.event.ActionEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
-import rw.battle.Entity;
-import rw.battle.Maximal;
-import rw.battle.Wall;
 import rw.enums.Colors;
+import rw.enums.Symbol;
 import rw.enums.WeaponType;
 import rw.util.Reader;
 import rw.util.Writer;
@@ -214,6 +212,11 @@ public class MainController {
         statusLabel.setText("Successfully saved world to" + destinationFile.getPath());
     }
 
+    /**
+     * Handles click event in the Save menu option.  Saves the Battle information displayed in the GUI as
+     * a world.txt file by default.
+     * @param event Click event in the Save menu option.
+     */
     @FXML
     void saveHandler(ActionEvent event) {
         try {
@@ -226,14 +229,62 @@ public class MainController {
 
     @FXML
     void gridMouseEnterHandler(MouseEvent event){
-        // TODO: Write method.
+        // Get GridPane row and column index of the clicked node
+        Node source = (Node) event.getSource();
+        int row = GridPane.getRowIndex(source);
+        int column = GridPane.getColumnIndex(source);
+
+        // If node is not a perimeter node and not null, then we proceed to display information about the entity
+        int rows = this.battle.getRows() + 2;
+        int columns = this.battle.getColumns() + 2;
+        if(!(row == 0 || row == rows - 1 || column == 0 || column == columns - 1)){
+            Entity entity = battle.getEntity(row - 1, column - 1);
+            StringBuilder sb = new StringBuilder();
+            switch (entity){
+                case null -> sb.append("");
+                case Wall wall -> sb.append("Type: Wall\n").append("Symbol: ").append(Symbol.WALL.getSymbol()).append("\n");
+                case Maximal maximal -> {
+                    sb.append("Type: Maximal\n");
+                    String symbol = String.valueOf(maximal.getSymbol());
+                    String name = maximal.getName();
+                    String health = String.valueOf(maximal.getHealth());
+                    String weaponStrength = String.valueOf(maximal.weaponStrength());
+                    String armourStrength = String.valueOf(maximal.weaponStrength());
+                    sb.append("Symbol: ").append(symbol).append("\n")
+                            .append("Name: ").append(name).append("\n")
+                            .append("Health: ").append(health).append("\n")
+                            .append("Weapon Strength: ").append(weaponStrength).append("\n")
+                            .append("Armour Strength: ").append(armourStrength).append("\n");
+                }
+                default -> {
+                    PredaCon predacon = (PredaCon) entity;
+                    sb.append("Type: PredaCon\n");
+                    String symbol = String.valueOf(predacon.getSymbol());
+                    String name = predacon.getName();
+                    String health = String.valueOf(predacon.getHealth());
+                    String weapon = predacon.getWeaponType().name();
+                    String weaponStrength = String.valueOf(predacon.weaponStrength());
+                    sb.append("Symbol: ").append(symbol).append("\n")
+                            .append("Name: ").append(name).append("\n")
+                            .append("Health: ").append(health).append("\n")
+                            .append("Weapon: ").append(weapon).append("\n")
+                            .append("Weapon Strength: ").append(weaponStrength).append("\n");
+                }
+            }
+            detailsOutput.setText(sb.toString());
+        }
     }
 
     @FXML
     void gridMouseExitHandler(MouseEvent event){
-        // TODO: Write method.
+        detailsOutput.clear();
     }
 
+    /**
+     * Right click event handler for a GridPane node.  If the node is not a perimeter wall, then it clears
+     * the node both in the GUI and battle attribute.  Finally, populate GridPane again with all changes.
+     * @param event Right click event on GridPane node.
+     */
     @FXML
     void gridClickHandler(ContextMenuEvent event){
         // Get GridPane row and column index of the clicked node
@@ -258,8 +309,6 @@ public class MainController {
      * Populates GridPane according to the information in battle attribute.
      */
     private void populateGridPane(){
-        // TODO: Remove this print statement
-        System.out.println(this.battle.battleString());
         // Clear previous content of grid pane if needed
         gridPane.getChildren().clear();
 
@@ -282,9 +331,7 @@ public class MainController {
                     Entity entity = this.battle.getEntity(row - 1, column - 1);
                     rectangle = new Rectangle(50,50);
                     switch (entity) {
-                        case null -> {
-                            rectangle.setFill(Colors.EMPTY.getColor());
-                        }
+                        case null -> rectangle.setFill(Colors.EMPTY.getColor());
                         case Wall wall -> {
                             rectangle.setFill(Colors.WALL.getColor());
                             label.setText(String.valueOf(entity.getSymbol()));
@@ -311,7 +358,7 @@ public class MainController {
         }
 
         // Attach handlers to new grid
-        this.attachGridPaneHandlers();
+        attachGridPaneHandlers();
     }
 
     /**
