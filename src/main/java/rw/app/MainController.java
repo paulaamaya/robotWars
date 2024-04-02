@@ -33,7 +33,6 @@ import java.io.File;
  * @tutorial 09
  * @date April 1, 2024
  */
-
 public class MainController {
 
     private Battle battle;
@@ -205,10 +204,13 @@ public class MainController {
         Stage stage = (Stage) loadButton.getParentPopup().getOwnerWindow();
         File destinationFile = fileChooser.showSaveDialog(stage);
         try {
+            // Write battle attribute to specified file
             Writer.writeBattleToFile(this.battle, destinationFile.getPath());
         } catch (RuntimeException e){
             statusLabel.setText(e.getMessage());
         }
+
+        // Inform user writing was successful
         statusLabel.setText("Successfully saved world to" + destinationFile.getPath());
     }
 
@@ -220,10 +222,13 @@ public class MainController {
     @FXML
     void saveHandler(ActionEvent event) {
         try {
+            // Write battle attribute to default world.txt file
             Writer.writeBattleToFile(this.battle, "world.txt");
         } catch (RuntimeException e){
             statusLabel.setText(e.getMessage());
         }
+
+        // Inform user writing was successful
         statusLabel.setText("Successfully saved world to world.txt");
     }
 
@@ -244,6 +249,7 @@ public class MainController {
         if(!(row == 0 || row == rows - 1 || column == 0 || column == columns - 1)){
             Entity entity = battle.getEntity(row - 1, column - 1);
             StringBuilder sb = new StringBuilder();
+            // Display information according to entity type
             switch (entity){
                 case null -> sb.append("");
                 case Wall wall -> sb.append("Type: Wall\n").append("Symbol: ").append(Symbol.WALL.getSymbol()).append("\n");
@@ -304,7 +310,7 @@ public class MainController {
         int rows = this.battle.getRows() + 2;
         int columns = this.battle.getColumns() + 2;
         if(!(row == 0 || row == rows - 1 || column == 0 || column == columns - 1)){
-            // Remove entity
+            // Remove entity from battle attribute
             this.battle.addEntity(row - 1, column - 1, null);
             // Repopulate grid
             populateGridPane();
@@ -442,6 +448,7 @@ public class MainController {
 
             // Create new battle object of corresponding size
             this.battle = new Battle(rows, columns);
+
             // Populate grid
             populateGridPane();
 
@@ -459,10 +466,10 @@ public class MainController {
      * Populates GridPane according to the information in battle attribute.
      */
     private void populateGridPane(){
-        // Clear previous content of grid pane if needed
+        // Clear previous content of grid pane
         gridPane.getChildren().clear();
 
-        // Get gridpane
+        // Get gridpane dimensions
         int rows = this.battle.getRows() + 2;
         int columns = this.battle.getColumns() + 2;
 
@@ -498,9 +505,11 @@ public class MainController {
                 }
                 // Set black outline for rectangles and add handler
                 rectangle.setStroke(Color.BLACK);
+
                 // Add rectangle and label to pane
                 gridPane.add(rectangle, column, row);
                 gridPane.add(label, column, row);
+
                 // Center label in grid
                 GridPane.setHalignment(label, Pos.CENTER.getHpos());
                 GridPane.setValignment(label, Pos.CENTER.getVpos());

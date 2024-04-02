@@ -16,7 +16,6 @@ import java.io.UncheckedIOException;
  * @tutorial 09
  * @date April 1, 2024
  */
-
 public class Writer {
 
     /**
