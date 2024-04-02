@@ -319,7 +319,53 @@ public class MainController {
 
     @FXML
     void newPredaconHandler(ActionEvent event) {
+        try {
+            // Read all input fields
+            String name = predaconNameInput.getText();
+            String symbol = predaconSymbolInput.getText();
+            int health = Integer.parseInt(predaconHealthInput.getText());
+            int x = Integer.parseInt(predaconXInput.getText());
+            int y = Integer.parseInt(predaconYInput.getText());
+            String weaponType = predaconWeaponTypeInput.getValue();
 
+            // Verify fields are not empty
+            if (name.isEmpty() || symbol.isEmpty() || weaponType == null){
+                throw new IllegalArgumentException("Please fill in all required PredaCon fields.");
+            }
+
+            // Verify symbol is char
+            if(symbol.length() != 1){
+                throw new IllegalArgumentException("Please enter a single character for PredaCon symbol.");
+            }
+
+            // Verify health is non-negative
+            if(health < 0){
+                throw new IllegalArgumentException("Please enter a non-negative integer for PredaCon health.");
+            }
+
+            // Verify coordinates are valid
+            if(!this.battle.valid(y,x)){
+                throw new IllegalArgumentException("Please enter a PredaCon coordinate that is within world bounds.");
+            }
+
+            // Add predacon to battle
+            WeaponType weapon = WeaponType.valueOf(weaponType);
+            PredaCon predaCon = new PredaCon(symbol.charAt(0), name, health, weapon);
+            this.battle.addEntity(y, x, predaCon);
+
+            // Populate grid
+            populateGridPane();
+
+            // Update status
+            statusLabel.setText("Added Predacon " + name + " in row " + y + ", column " + x + ".");
+
+            // Reset all input fields
+            resetPredaconInputFields();
+        } catch (NumberFormatException e){
+            statusLabel.setText("Please enter integers for PredaCon health, x-coord, and y-coord.");
+        } catch (IllegalArgumentException e){
+            statusLabel.setText(e.getMessage());
+        }
     }
 
     @FXML
@@ -329,7 +375,7 @@ public class MainController {
             int columns = Integer.parseInt(worldColumnsInput.getText());
 
             if(rows < 0 || columns < 0){
-                throw new IllegalArgumentException("Rows and columns cannot be negative integers");
+                throw new IllegalArgumentException("Rows and columns cannot be negative integers.");
             }
 
             // Create new battle object of corresponding size
@@ -337,7 +383,7 @@ public class MainController {
             // Populate grid
             populateGridPane();
         } catch (NumberFormatException e){
-            statusLabel.setText("Please enter integer values for rows and columns");
+            statusLabel.setText("Please enter integer values for rows and columns.");
         } catch (IllegalArgumentException e){
             statusLabel.setText(e.getMessage());
         }
@@ -411,6 +457,15 @@ public class MainController {
             // Add right-click handler
             node.setOnContextMenuRequested(this::gridClickHandler);
         }
+    }
+
+    private void resetPredaconInputFields(){
+        predaconSymbolInput.clear();
+        predaconNameInput.clear();
+        predaconHealthInput.clear();
+        predaconWeaponTypeInput.setValue(null);
+        predaconXInput.clear();
+        predaconYInput.clear();
     }
 
 }
