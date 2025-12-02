@@ -12,8 +12,8 @@
 
 ## Project Overview
 
-This application is a world map editor for a Robot War simulation.  The world map consists of a grid with m rows and 
-n columns where each grid square can be in exactly one of the following states:
+This application is a world map editor for a Robot War simulation.  The world map consists of a grid with `m` rows and 
+`n` columns where each grid square can be in exactly one of the following states:
 
 ![Map States](docs/map-legend.png)
 
