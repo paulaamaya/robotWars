@@ -15,7 +15,7 @@
 This application is a world map editor for a Robot War simulation.  The world map consists of a grid with `m` rows and 
 `n` columns where each grid square can be in exactly one of the following states:
 
-![Map States](docs/map-legend.png)
+![Map States](img/map-legend.png)
 
 By default, the map is padded with a perimeter of walls to represent the world boundaries.
 
@@ -29,7 +29,7 @@ For our coordinate system we will use the convention `(row,col)` where `row` is 
 
 For instance, the example below represents a `3 x 3` world with a PredaCon in coordinate `(0,0)` and a Maximal in coordinate `(2,1)`.
 
-![First Map Example](docs/ex-one-map.png)
+![First Map Example](img/ex-one-map.png)
 
 To obtain additional information about the entity in a world map square, one may hover over the desired square.  
 
@@ -71,7 +71,7 @@ in the Master tab, under the World section.
 >Note: World dimensions must be non-negative integers.  Failure to enter the correct format in either filed will trigger
 > a warning in the status bar at the bottom of the page.
 
-![Enter new world dimension](docs/enter-world.png)
+![Enter new world dimension](img/enter-world.png)
 
 Alternatively, you can load in a pre-defined world from a `.txt` file on your machine using File > Load World menu option.
 Note however that the `.txt` file must be of the specified format.
@@ -83,18 +83,18 @@ Note however that the `.txt` file must be of the specified format.
 Entities in a world map can be added using the Master tab.  Failure to provide the correct format in any of the fields 
 will trigger a warning in the status bar at the bottom of the page.
 
-![Adding a PredaCon](docs/enter-entity.png)
+![Adding a PredaCon](img/enter-entity.png)
 
 After an entity has been successfully added, the status bar will display the name and location of the new entity.
 
-![Removing a PredaCon](docs/enter-entity-status.png)
+![Removing a PredaCon](img/enter-entity-status.png)
 
 ### Removing Entities
 
 To remove an entity, simply right click its position on the grid.  After an entity has been successfully deleted, the 
 status bar will display the location where the entity was removed.
 
-![Removing an Entity](docs/remove-entity-status.png)
+![Removing an Entity](img/remove-entity-status.png)
 
 ## Saving a World Map
 
@@ -104,4 +104,4 @@ All the edits made in the Program UI can be saved to a `.txt` file of the specif
 
 If file was saved successfully, the status bar will report the location of the saved file.
 
-![Saving to a File](docs/save-status.png)
+![Saving to a File](img/save-status.png)
